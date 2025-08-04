@@ -1,20 +1,18 @@
 import DarkVeil from '../Utils/DarkVeil';
 import TextType from '../Utils/TextType';
-import { useRef } from 'react';
 export default function Hero() {
     const handleDownload = () => {
         // Implement resume download
         window.open('/resume.pdf', '_blank');
     };
-    const bg = useRef(<DarkVeil />)
 
     const handleContact = () => {
-        // Smooth scroll to contact section
+       
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     };
 
     return (
-        <div className={`w-full min-h-[80vh] flex items-center ${bg}  justify-center relative overflow-hidden`}>
+        <div className={`w-full min-h-[80vh] flex items-center   justify-center relative overflow-hidden`}>
 
             {/* Content */}
             <div className="max-w-4xl mx-auto px-6 relative z-10">

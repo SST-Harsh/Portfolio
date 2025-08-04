@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 function SplashCursor({
   SIM_RESOLUTION = 128,
   DYE_RESOLUTION = 1440,
-  CAPTURE_RESOLUTION = 512,
+  CAPTURE_RESOLUTION = 212,
   DENSITY_DISSIPATION = 3.5,
   VELOCITY_DISSIPATION = 2,
   PRESSURE = 0.1,
@@ -14,7 +14,7 @@ function SplashCursor({
   SPLAT_FORCE = 6000,
   SHADING = true,
   COLOR_UPDATE_SPEED = 10,
-  BACK_COLOR = { r: 0.5, g: 0, b: 0 },
+  BACK_COLOR = { r: 0.9, g: 0, b: 0 },
   TRANSPARENT = true
 }) {
   const canvasRef = useRef(null);

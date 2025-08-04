@@ -2,22 +2,22 @@ import { lazy } from "react";
 import harsh from "../assets/harsh.jpg"
 export default function About() {
   return (
-    <section id="about" className="w-full py-20 bg-gray-100">
+    <section id="about" className="w-full py-20 bg-gray-700">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           {/* Text Content */}
           <div className="md:w-1/2">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-100 mb-6">
               About <span className="text-indigo-600">Me</span>
             </h1>
             <div className="space-y-4">
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-100 leading-relaxed">
                 I'm Harsh, a passionate full-stack developer specializing in modern web technologies. With expertise in the MERN stack, I build interactive, responsive, and scalable web applications.
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-100 leading-relaxed">
                 My development philosophy centers around clean code, intuitive UX, and performance optimization. I enjoy solving complex problems and turning ideas into functional, beautiful digital experiences.
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-100 leading-relaxed">
                 Currently expanding my skills in cloud computing (AWS) and advanced React patterns, while contributing to open-source projects in my spare time.
               </p>
             </div>
