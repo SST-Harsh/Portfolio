@@ -1,6 +1,8 @@
+import { lazy } from "react";
+import harsh from "../assets/harsh.jpg"
 export default function About() {
   return (
-    <section id="about" className="w-full py-20 bg-gray-50">
+    <section id="about" className="w-full py-20 bg-gray-100">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           {/* Text Content */}
@@ -20,18 +22,18 @@ export default function About() {
               </p>
             </div>
             
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap  gap-2 md:gap-4">
               <span className="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
-                JavaScript
+                MongoDB
               </span>
               <span className="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
-                React
+               Express.js
+              </span>
+              <span className="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
+                 React.js
               </span>
               <span className="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
                 Node.js
-              </span>
-              <span className="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
-                MongoDB
               </span>
             </div>
           </div>
@@ -41,7 +43,7 @@ export default function About() {
             <div className="relative w-64 h-64 md:w-80 md:h-80 bg-indigo-100 rounded-full overflow-hidden border-4 border-white shadow-xl">
               {/* Placeholder for your image or illustration */}
               <div className="w-full h-full flex items-center justify-center text-indigo-400">
-                
+                  <img loading="lazy" onLoad={lazy} src={harsh} className=" object-center p-0.5" />
                 
               </div>
             </div>

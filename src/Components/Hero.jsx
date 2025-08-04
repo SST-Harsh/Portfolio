@@ -1,62 +1,63 @@
 import DarkVeil from '../Utils/DarkVeil';
 import TextType from '../Utils/TextType';
-
+import { useRef } from 'react';
 export default function Hero() {
-  const handleDownload = () => {
-    // Implement resume download
-    window.open('/resume.pdf', '_blank');
-  };
+    const handleDownload = () => {
+        // Implement resume download
+        window.open('/resume.pdf', '_blank');
+    };
+    const bg = useRef(<DarkVeil />)
 
-  const handleContact = () => {
-    // Smooth scroll to contact section
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
+    const handleContact = () => {
+        // Smooth scroll to contact section
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    };
 
-  return (
-    <div className={`w-full min-h-[80vh] flex items-center  justify-center relative overflow-hidden`}>
+    return (
+        <div className={`w-full min-h-[80vh] flex items-center ${bg}  justify-center relative overflow-hidden`}>
 
-      {/* Content */}
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col items-center justify-center text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-            Hello<span className="ml-4 text-indigo-400">
-              <TextType
-                text={["Developers", "MERN Enthusiast", "Happy coding!"]}
-                typingSpeed={75}
-                pauseDuration={1600}
-                showCursor={true}
-                cursorCharacter="|"
-              />
-            </span>
-          </h1>
+            {/* Content */}
+            <div className="max-w-4xl mx-auto px-6 relative z-10">
+                <div className="flex flex-col items-center justify-center text-center">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+                        Hello<span className="ml-4 text-indigo-400">
+                            <TextType
+                                text={["Developers", "MERN Enthusiast", "Happy coding!"]}
+                                typingSpeed={75}
+                                pauseDuration={1600}
+                                showCursor={true}
+                                cursorCharacter="|"
+                            />
+                        </span>
+                    </h1>
 
-          <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
-            Welcome to my portfolio. I'm Harsh, a passionate Full Stack Developer specializing in modern web technologies and cloud solutions.
-          </p>
+                    <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
+                        Welcome to my portfolio. I'm Harsh, a passionate Full Stack Developer specializing in modern web technologies and cloud solutions.
+                    </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4">
-            <button
-              className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              onClick={handleDownload}
-              aria-label="Download Resume"
-            >
-              Download Resume
-            </button>
+                    <div className="mt-10 flex flex-col sm:flex-row gap-4">
+                        <button
+                            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            onClick={handleDownload}
+                            aria-label="Download Resume"
+                        >
+                            Download Resume
+                        </button>
 
-            <button
-              className="px-8 py-3 border border-indigo-400 text-indigo-400 hover:bg-indigo-900/30 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              onClick={handleContact}
-              aria-label="Contact Me"
-            >
-              Contact Me
-            </button>
-          </div>
+                        <button
+                            className="px-8 py-3 border border-indigo-400 text-indigo-400 hover:bg-indigo-900/30 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            onClick={handleContact}
+                            aria-label="Contact Me"
+                        >
+                            Contact Me
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
 
         </div>
-      </div>
 
-     
-    </div>
-    
-  );
+    );
 }
