@@ -6,8 +6,8 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <nav className="w-full md:max-w-5xl mx-auto rounded-2xl  text-white bg-white/10 backdrop-blur-3xl md:px-9 md:py-6 border border-white/20">
-            <div className="flex justify-between items-center">
+        <nav className="w-full md:max-w-5xl mx-auto md:rounded-2xl  text-white bg-white/10 backdrop-blur-3xl px-4 md:px-9 md:py-6 border border-white/20">
+            <div className="flex justify-between  items-center">
                 {/* Logo/Brand */}
                 <div className="flex items-center">
                     <a href="#" className="text-xl font-bold hover:text-indigo-300 transition-colors">
@@ -69,7 +69,7 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="md:hidden mt-4 bg-white/10 backdrop-blur-lg rounded-lg p-4 space-y-3 border border-white/20">
+                <div className="md:hidden mt-4 bg-white/10 backdrop-blur-lg rounded-lg p-3 mb-3 space-y-3 border border-white/20">
                     <a
                         href="#home"
                         className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/20 transition-colors"
