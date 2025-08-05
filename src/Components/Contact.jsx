@@ -1,25 +1,18 @@
-import { useForm } from 'react-hook-form';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaGithub, FaLinkedin } from 'react-icons/fa';
-import { motion } from "framer-motion";
+import {  motion } from "framer-motion";
+import { forwardRef } from 'react';
+import Form from './ReusableComponents/Form';
+import InputFields from './ReusableComponents/InputFields';
 
-export default function Contact() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset
-  } = useForm();
-
-  const onSubmit = (data) => {
+const Contact = forwardRef(( props,ref)=> {
+  
+  const handleFormSubmit = async (data) => {
     try {
-      const formdata = JSON.stringify(data)
-      localStorage.setItem("Contact form data", formdata)
-      console.log(data)
+      const formData = JSON.stringify(data);
+      localStorage.setItem("Contact form data", formData);
       alert("Thank you for your message! I'll get back to you soon.");
-      reset();
-    }catch(error){
-      console.error("failed to save form data",error)
-
+    } catch (error) {
+      console.error("Failed to save form data", error);
     }
   };
 
@@ -65,7 +58,6 @@ export default function Contact() {
       }
     }
   };
-
   const staggerContainer = {
     hidden: { opacity: 0 },
     show: {
@@ -90,8 +82,9 @@ export default function Contact() {
     }
   };
 
+
   return (
-    <section id="contact" className="py-20 px-4 bg-gray-800">
+    <section ref={ref} className="py-20 px-4  bg-gray-800">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"
@@ -116,107 +109,26 @@ export default function Contact() {
 
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Contact Form */}
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            variants={fadeInLeft}
-            className="lg:w-1/2 bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/10"
-          >
-            <motion.form
-              onSubmit={handleSubmit(onSubmit)}
-              className="space-y-6"
-              variants={staggerContainer}
+         
+            
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.25 }}
+              variants={fadeInLeft}
+              className='w-full max-w-md mx-auto md:h-96'
+             
             >
-              <motion.div variants={staggerItem}>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="John Doe"
-                  className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 text-white ${errors.name ? 'border-red-500 focus:ring-red-200' : 'border-white/20 focus:ring-indigo-300'
-                    }`}
-                  {...register("name", { required: 'Name is required' })}
-                  aria-invalid={errors.name ? "true" : "false"}
-                />
-                {errors.name && (
-                  <p className="mt-2 text-sm text-red-400">{errors.name.message}</p>
-                )}
-              </motion.div>
+              {/* reusable Form for conatct  */}
 
-              <motion.div variants={staggerItem}>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="john@example.com"
-                  className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 text-white ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-white/20 focus:ring-indigo-300'
-                    }`}
-                  {...register("email", {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address'
-                    }
-                  })}
-                  aria-invalid={errors.email ? "true" : "false"}
-                />
-                {errors.email && (
-                  <p className="mt-2 text-sm text-red-400">{errors.email.message}</p>
-                )}
-              </motion.div>
 
-              <motion.div variants={staggerItem}>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Your Message *
-                </label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  placeholder="Tell me about your project..."
-                  className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 text-white ${errors.message ? 'border-red-500 focus:ring-red-200' : 'border-white/20 focus:ring-indigo-300'
-                    }`}
-                  {...register("message", {
-                    required: 'Message is required',
-                    minLength: {
-                      value: 20,
-                      message: 'Message must be at least 20 characters'
-                    }
-                  })}
-                  aria-invalid={errors.message ? "true" : "false"}
-                />
-                {errors.message && (
-                  <p className="mt-2 text-sm text-red-400">{errors.message.message}</p>
-                )}
-              </motion.div>
+              <Form
+                fields={InputFields} //reusable fields
+                onSubmit={handleFormSubmit}
+                buttonText="Send Message"
 
-              <motion.div variants={staggerItem}>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
-                    }`}
-
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Sending...
-                    </span>
-                  ) : (
-                    'Send Message'
-                  )}
-                </button>
-              </motion.div>
-            </motion.form>
-          </motion.div>
+              />
+            </motion.div>
 
           {/* Contact Information */}
           <motion.div
@@ -238,7 +150,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-300">Email</h4>
-                    <a href="mailto:your.email@example.com" className="text-white hover:text-indigo-300 transition-colors">
+                    <a href="mailto:harshpalsingh565@gmail.com" className="text-white hover:text-indigo-300 transition-colors">
                       harshpalsingh565@gmail.com
                     </a>
                   </div>
@@ -250,7 +162,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-300">Phone</h4>
-                    <a href="tel:+1234567890" className="text-white hover:text-indigo-300 transition-colors">
+                    <a href="tel:+917748982114" className="text-white hover:text-indigo-300 transition-colors">
                       +91 774 898 2114
                     </a>
                   </div>
@@ -265,6 +177,7 @@ export default function Contact() {
                     <p className="text-white">Ahmedabad</p>
                   </div>
                 </motion.div>
+                
               </div>
             </motion.div>
 
@@ -278,7 +191,7 @@ export default function Contact() {
                   variants={staggerItem}
                   href="https://github.com/harshps900"
                   target="_blank"
-                  rel="noopener noreferrer"
+
                   className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-indigo-600 rounded-full transition-colors"
                   aria-label="GitHub"
 
@@ -289,7 +202,7 @@ export default function Contact() {
                   variants={staggerItem}
                   href="https://www.linkedin.com/in/harsh-pal-singh-8583a2190/"
                   target="_blank"
-                  rel="noopener noreferrer"
+
                   className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-indigo-600 rounded-full transition-colors"
                   aria-label="LinkedIn"
 
@@ -303,4 +216,5 @@ export default function Contact() {
       </div>
     </section>
   );
-}
+})
+export default Contact
