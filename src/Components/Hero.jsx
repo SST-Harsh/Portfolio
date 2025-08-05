@@ -1,13 +1,12 @@
+import { forwardRef } from 'react';
 import TextType from '../Utils/TextType';
 import harshCv from '../assets/harshCv.pdf'
-export default function Hero() {
-    const handleContact = () => {
 
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    };
+const Hero=forwardRef(({ scrollToConnect }, ref) => {
+   
 
     return (
-        <div className={`w-full min-h-[80vh] flex items-center   justify-center relative overflow-hidden`}>
+        <section id="home" ref={ref} className={`w-full min-h-[90vh] flex items-center justify-center relative overflow-hidden`}>
 
             {/* Content */}
             <div className="max-w-4xl mx-auto px-6 relative z-10">
@@ -30,8 +29,9 @@ export default function Hero() {
 
                     <div className="mt-10 flex flex-col sm:flex-row gap-4">
                         <a href={harshCv}
-                            download={harshCv}
-                            target='_bkank'>
+                            download='harshCv'
+ 
+                           target='_blank'>
                             <button
                                 className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                 aria-label="Download Resume">
@@ -40,18 +40,19 @@ export default function Hero() {
                         </a>
                         <button
                             className="px-8 py-3 border border-indigo-400 text-indigo-400 hover:bg-indigo-900/30 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            onClick={handleContact}
+                            onClick={scrollToConnect}
                             aria-label="Contact Me"
                         >
                             Contact Me
                         </button>
                     </div>
-
+                     
                 </div>
             </div>
 
 
-        </div>
+        </section>
 
     );
-}
+})
+export default Hero

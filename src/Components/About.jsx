@@ -1,8 +1,9 @@
 import { lazy } from "react";
+import { forwardRef } from "react";
 import harsh from "../assets/harsh.jpg"
-export default function About() {
+const About= forwardRef(( props,ref)=> {
   return (
-    <section id="about" className="w-full py-20 bg-gray-700">
+    <section id="about" ref={ref} className="w-full py-20 bg-gray-700">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           {/* Text Content */}
@@ -52,4 +53,5 @@ export default function About() {
       </div>
     </section>
   );
-}
+})
+export default About

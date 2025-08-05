@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-
-export default function Navbar() {
+import { forwardRef } from "react";
+const  Navbar=forwardRef(({ scrollToConnect }, ref) =>  {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <nav className="w-full md:max-w-5xl  mx-auto md:rounded-2xl  text-white bg-white/10 backdrop-blur-3xl px-10  py-2 md:px-9 md:py-6 border border-white/20">
+        <nav ref={ref} className="w-full md:max-w-5xl  mx-auto md:rounded-2xl  text-white bg-white/10 backdrop-blur-3xl px-10  py-2 md:px-9 md:py-6 border border-white/20">
             <div className="flex justify-between  items-center">
                 {/* Logo/Brand */}
                 <div className="flex items-center">
@@ -102,4 +102,5 @@ export default function Navbar() {
             )}
         </nav>
     );
-}
+})
+export default Navbar
