@@ -1,13 +1,8 @@
-import DarkVeil from '../Utils/DarkVeil';
 import TextType from '../Utils/TextType';
+import harshCv from '../assets/harshCv.pdf'
 export default function Hero() {
-    const handleDownload = () => {
-        // Implement resume download
-        window.open('/resume.pdf', '_blank');
-    };
-
     const handleContact = () => {
-       
+
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     };
 
@@ -34,14 +29,15 @@ export default function Hero() {
                     </p>
 
                     <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                        <button
-                            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            onClick={handleDownload}
-                            aria-label="Download Resume"
-                        >
-                            Download Resume
-                        </button>
-
+                        <a href={harshCv}
+                            download={harshCv}
+                            target='_bkank'>
+                            <button
+                                className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                aria-label="Download Resume">
+                                Download Resume
+                            </button>
+                        </a>
                         <button
                             className="px-8 py-3 border border-indigo-400 text-indigo-400 hover:bg-indigo-900/30 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             onClick={handleContact}
