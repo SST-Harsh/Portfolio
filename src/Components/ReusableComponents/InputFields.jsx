@@ -5,6 +5,8 @@ const InputFields = [
     type: "text",
     placeholder: "John Doe",
     validation: { required: "Name is required" },
+     labelClassName:"text-white",
+    inputClassName:" text-white",
   },
   {
     name: "email",
@@ -18,17 +20,10 @@ const InputFields = [
         message: "Invalid email address",
       },
     },
+     labelClassName:"text-white",
+    inputClassName:" text-white",
   },
-  // {
-  //   name: "password",
-  //   label: "Password",
-  //   type: "password",
-  //   autoComplete: "off", 
-  //   placeholder: "Enter your password",
-  //   validation: {
-  //     required: "Password is required",
-  //   },
-  // },
+  
   {
     name: "message",
     label: "Your Message *",
@@ -42,7 +37,10 @@ const InputFields = [
         message: "Message must be at least 20 characters",
       },
     },
+    labelClassName:"text-white",
+    inputClassName:" text-white",
   },
+  
 ];
 
 export default InputFields;

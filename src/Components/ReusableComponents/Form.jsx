@@ -4,6 +4,7 @@ export default function Form(
     { onSubmit,
         fields = [],
         buttonText = "Submit",
+        buttonClassName,
 
     }) {
     // Animation variants defined directly in component
@@ -36,14 +37,15 @@ export default function Form(
         formState: { errors },
         reset
     } = useForm();
+    
     const handleFormData = (data) => {
         onSubmit(data)
         reset()
 
-    }
+    } 
     return (
-        <div 
-        className="w-full max-w-md mx-auto shadow-md bg-white/10 backdrop-blur-sm rounded-xl px-5 py-4  md:mb-200 border border-white/10">
+        <div
+            className="w-full max-w-md mx-auto shadow-md bg-white/10 backdrop-blur-sm rounded-xl px-5 py-4   border border-white/10">
             <motion.form
                 onSubmit={handleSubmit(handleFormData)}
                 className="space-y-6 h-auto"
@@ -53,26 +55,29 @@ export default function Form(
                 {/* all fields to show  */}
                 {fields.map((field) => (
                     <motion.div key={field.name} variants={staggerItem}>
-                        <label htmlFor={field.name} className="block text-sm font-medium text-gray-300 mb-2">
+                        <label htmlFor={field.name} className={`block text-sm ${field.labelClassName} font-medium  mb-2`}>
                             {field.label}
                         </label>
                         {field.type === "textarea" ? (
                             <textarea
                                 id={field.name}
+                                
                                 placeholder={field.placeholder}
                                 rows={field.rows || 4}
-                                className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 text-white ${errors[field.name] ? "border-red-500 focus:ring-red-200" : "border-white/20 focus:ring-indigo-300"
+                                className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 ${field.inputClassName}  ${errors[field.name] ? "border-red-500 focus:ring-red-200" : "border-white/20 focus:ring-indigo-300"
                                     }`}
                                 {...register(field.name, field.validation)}
+                                
                                 aria-invalid={errors[field.name] ? "true" : "false"}
                             />
                         ) : (
                             <input
+                                name={field.name}
                                 type={field.type}
                                 id={field.name}
-                                autoComplete="off"
+                                autoComplete={field.autoComplete}
                                 placeholder={field.placeholder}
-                                className={`w-full px-4 py-3 bg-white/5 border rounded-lg focus:outline-none focus:ring-2 text-white ${errors[field.name] ? "border-red-500 focus:ring-red-200" : "border-white/20 focus:ring-indigo-300"
+                                className={`w-full px-4 py-3  bg-white/5 ${field.inputClassName} border rounded-lg focus:outline-none focus:ring-2  ${errors[field.name] ? "border-red-500 focus:ring-red-200" : "border-white/20 focus:ring-indigo-300"
                                     }`}
                                 {...register(field.name, field.validation)}
                                 aria-invalid={errors[field.name] ? "true" : "false"}
@@ -88,7 +93,7 @@ export default function Form(
                     <button
                         type="submit"
 
-                        className={`w-full py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800`}
+                        className={`w-full py-3 px-6 bg-indigo-600 hover:bg-indigo-700 ${buttonClassName} font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800`}
 
                     >{buttonText}
                     </button>

@@ -126,6 +126,7 @@ const Contact = forwardRef(( props,ref)=> {
                 fields={InputFields} //reusable fields
                 onSubmit={handleFormSubmit}
                 buttonText="Send Message"
+                
 
               />
             </motion.div>

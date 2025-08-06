@@ -2,8 +2,12 @@ import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { forwardRef } from "react";
-const  Navbar=forwardRef(({ scrollToConnect }, ref) =>  {
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthProvider";
+const Navbar = forwardRef(({ scrollToConnect }, ref) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { isLoggedIn, logout } = useAuth()
+    const navigate = useNavigate()
 
     return (
         <nav ref={ref} className="w-full md:max-w-5xl  mx-auto md:rounded-2xl  text-white bg-white/10 backdrop-blur-3xl px-10  py-2 md:px-9 md:py-6 border border-white/20">
@@ -18,7 +22,7 @@ const  Navbar=forwardRef(({ scrollToConnect }, ref) =>  {
                 {/* Desktop Navigation */}
                 <ul className="hidden md:flex items-center space-x-8">
                     <li>
-                        <a 
+                        <a
                             href="#home"
                             className="hover:text-indigo-300 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                         >
@@ -26,7 +30,7 @@ const  Navbar=forwardRef(({ scrollToConnect }, ref) =>  {
                         </a>
                     </li>
                     <li>
-                        <a 
+                        <a
                             href="#about"
                             className="hover:text-indigo-300 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                         >
@@ -34,7 +38,7 @@ const  Navbar=forwardRef(({ scrollToConnect }, ref) =>  {
                         </a>
                     </li>
                     <li>
-                        <a 
+                        <a
                             href="#projects"
                             className="hover:text-indigo-300 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                         >
@@ -42,13 +46,45 @@ const  Navbar=forwardRef(({ scrollToConnect }, ref) =>  {
                         </a>
                     </li>
                     <li>
-                        <a 
+                        <a
                             href="#contact"
                             className="hover:text-indigo-300 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                         >
                             Contact
                         </a>
                     </li>
+                    {!isLoggedIn ? (
+                        <>
+                            <li>
+                                <Link to="/login">
+                                    <button
+                                        className="p-1 border py-2 px-4 rounded-full border-blue-100 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-800 hover:cursor-pointer hover:scale-105 duration-200 transition-opacity" >
+                                        Login </button>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/register">
+                                    <button
+                                        className="p-1 border py-2 px-4  rounded-full border-blue-100 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-800 hover:cursor-pointer hover:scale-105 duration-200 transition-opacity">
+                                        Signup
+                                    </button>
+                                </Link>
+                            </li>
+                        </>
+
+                    ) : (
+                        <>
+                            <li>
+                                <button
+                                    onClick={() => { logout(); navigate('/login'); }}
+                                    className="p-1 border py-2 px-4  rounded-full border-blue-100 hover:bg-gradient-to-r hover:from-red-400 hover:to-purple-800 hover:cursor-pointer hover:scale-105 duration-200 transition-opacity">
+                                    Logout
+                                </button>
+                            </li>
+                        </>
+                    )
+
+                    }
                 </ul>
 
                 {/* Mobile Menu Button */}
@@ -98,6 +134,36 @@ const  Navbar=forwardRef(({ scrollToConnect }, ref) =>  {
                     >
                         Contact
                     </a>
+                    {!isLoggedIn ? (<>
+                        <div
+                            className="flex flex-col gap-2 "
+                        >
+                            <Link to="/login">
+                                <button
+                                    className="p-1  w-full border px-2 py-2  md:py-2 md:px-4 rounded-full border-blue-100 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-800 hover:cursor-pointer hover:scale-105 duration-200 transition-opacity" >
+                                    Login </button>
+                            </Link>
+                            <Link to="/register">
+                                <button
+                                    className="p-1 w-full  border py-2 px-4  rounded-full border-blue-100 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-800 hover:cursor-pointer hover:scale-105 duration-200 transition-opacity">
+                                    Signup
+                                </button>
+                            </Link>
+                        </div>
+
+                    </>) : (
+                        <button
+                            onClick={() => {
+                                logout();
+                                navigate('/login');
+                                setIsMenuOpen(false);
+                            }}
+                            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-400 hover:bg-red-500 hover:text-white transition-colors"
+                        >
+                            Logout
+                        </button>
+                    )}
+
                 </div>
             )}
         </nav>
