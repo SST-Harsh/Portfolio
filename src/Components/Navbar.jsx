@@ -133,13 +133,7 @@ const Navbar = forwardRef(({ scrollToConnect }, ref) => {
                 ))}
               </ul>
             </div>
-          </li>
-
-          <li>
-            <Link to="/pratice">
-              <button>Practice</button>
-            </Link>
-          </li>
+          </li>         
         </ul>
 
         {/* Mobile Menu Button */}
