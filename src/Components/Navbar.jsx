@@ -135,11 +135,7 @@ const Navbar = forwardRef(({ scrollToConnect }, ref) => {
             </div>
           </li>
 
-          <li>
-            <Link to="/canva">
-              <button>Canva</button>
-            </Link>
-          </li>
+          
         </ul>
 
         {/* Mobile Menu Button */}
