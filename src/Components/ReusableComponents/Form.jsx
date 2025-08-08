@@ -45,7 +45,7 @@ export default function Form(
 
     return (
         <div
-            className="w-full max-w-md mx-auto shadow-md bg-white/10 backdrop-blur-sm rounded-xl px-5 py-4   border border-white/10">
+            className="w-full max-w-md mx-auto shadow-md  backdrop-blur-3xl rounded-xl px-5 py-4    border border-white/40">
             <motion.form
                 onSubmit={handleSubmit(handleFormData)}
                 className="space-y-6 h-auto"
@@ -64,7 +64,7 @@ export default function Form(
 
                                 placeholder={field.placeholder}
                                 rows={field.rows || 4}
-                                className={`w-full px-4 py-3 bg-white/5  ${field.cardBorder} ${field.placeholderClass} rounded-lg  border focus:ring-2 ${field.inputClassName}  ${errors[field.name] ? "border-red-500 focus:ring-red-200" : "border-white/20 focus:ring-indigo-300"
+                                className={`w-full px-4 py-3  ${field.cardBorder} ${field.placeholderClass} rounded-lg  border focus:ring-2 ${field.inputClassName}  ${errors[field.name] ? "border-red-500 focus:ring-red-200" : "border-white/20 focus:ring-indigo-300"
                                     }`}
                                 {...register(field.name, field.validation)}
 
@@ -77,7 +77,7 @@ export default function Form(
                                 id={field.name}
                                 autoComplete={field.autoComplete}
                                 placeholder={field.placeholder}
-                                className={`w-full px-4 py-3  bg-white/5 ${field.inputClassName}  ${field.borderClass} border rounded-lg focus:outline-none focus:ring-2  ${errors[field.name] ? "border-red-500 focus:ring-red-200" : "border-white/20 focus:ring-indigo-300"
+                                className={`w-full px-4 py-3   ${field.inputClassName}  ${field.borderClass} border rounded-lg focus:outline-none focus:ring-2  ${errors[field.name] ? "border-red-500 focus:ring-red-200" : "border-white/20 focus:ring-indigo-300"
                                     }`}
                                 {...register(field.name, field.validation)}
                                 aria-invalid={errors[field.name] ? "true" : "false"}

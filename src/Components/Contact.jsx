@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import Form from "./ReusableComponents/Form";
 import useInputFields from "./ReusableComponents/InputFields";
 import { useTheme } from "../Context/ThemeProvider";
+import {useAuth} from "../Context/AuthProvider";
 
 // Theme-based styles
 const themeStyles = {
@@ -68,6 +69,7 @@ const themeStyles = {
 const Contact = forwardRef((props, ref) => {
   const { theme } = useTheme();
   const fields = useInputFields()
+  const {showAlert}=useAuth()
 
 
   const styles = {
@@ -87,7 +89,7 @@ const Contact = forwardRef((props, ref) => {
     try {
       const formData = JSON.stringify(data);
       localStorage.setItem("Contact form data", formData);
-      alert("Thank you for your message! I'll get back to you soon.");
+      showAlert("Thank you for your message! I'll get back to you soon.","success");
     } catch (error) {
       console.error("Failed to save form data", error);
     }

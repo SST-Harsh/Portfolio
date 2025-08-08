@@ -1,4 +1,3 @@
-// ReusableComponents/InputFields.js
 import { useTheme } from "../../Context/ThemeProvider";
 
 const useInputFields = () => {
@@ -77,8 +76,8 @@ const useInputFields = () => {
       validation: {
         required: "Message is required",
         minLength: {
-          value: 20,
-          message: "Message must be at least 20 characters",
+          value: 5,
+          message: "Message must be at least 5 characters",
         },
       },
       labelClassName: labelClass,
