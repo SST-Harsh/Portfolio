@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { Renderer, Program, Mesh, Triangle, Vec2 } from "ogl";
+import { useTheme } from "../Context/ThemeProvider";
 import "./DarkVeil.css";
 
 const vertex = `
@@ -18,6 +19,8 @@ uniform float uNoise;
 uniform float uScan;
 uniform float uScanFreq;
 uniform float uWarp;
+uniform float uBrightness;
+uniform float uSaturation;
 #define iTime uTime
 #define iResolution uResolution
 
@@ -67,6 +70,12 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord){
 void main(){
     vec4 col;mainImage(col,gl_FragCoord.xy);
     col.rgb=hueShiftRGB(col.rgb,uHueShift);
+    
+    // Apply brightness and saturation adjustments
+    col.rgb = col.rgb * uBrightness;
+    float gray = dot(col.rgb, vec3(0.299, 0.587, 0.114));
+    col.rgb = mix(vec3(gray), col.rgb, uSaturation);
+    
     float scanline_val=sin(gl_FragCoord.y*uScanFreq)*0.5+0.5;
     col.rgb*=1.-(scanline_val*scanline_val)*uScan;
     col.rgb+=(rand(gl_FragCoord.xy+uTime)-0.5)*uNoise;
@@ -75,15 +84,55 @@ void main(){
 `;
 
 export default function DarkVeil({
-  hueShift = 0,
   noiseIntensity = 0,
   scanlineIntensity = 0,
   speed = 0.5,
   scanlineFrequency = 0,
   warpAmount = 0,
   resolutionScale = 1,
+  customHueShift = null, // Optional override for manual hue control
+  customBrightness = null,
+  customSaturation = null,
 }) {
+  const { theme } = useTheme();
   const ref = useRef(null);
+
+  // Theme-based visual properties
+  const themeSettings = {
+    light: {
+      hue: 0,
+      brightness: 3.5,    // Much brighter for off-white appearance
+      saturation: 0.1     // Very low saturation for neutral colors
+    },
+    dark: {
+      hue: 20,
+      brightness: 1.8,    // Dimmer for dark theme
+      saturation: 0.6     // Moderate saturation
+    },
+    purple: {
+      hue: 340,
+      brightness: 1.0,
+      saturation: 0.8
+    },
+    coffee: {
+      hue: 210,
+      brightness: 1.0,
+      saturation: 0.7
+    },
+    default: {
+      hue: 0,
+      brightness: 1.0,
+      saturation: 1.0
+    }
+  };
+
+  const currentSettings = themeSettings[theme] || themeSettings.default;
+  
+  // Use custom overrides if provided
+  const currentHueShift = customHueShift !== null ? customHueShift : currentSettings.hue;
+  const currentBrightness = customBrightness !== null ? customBrightness : currentSettings.brightness;
+  const currentSaturation = customSaturation !== null ? customSaturation : currentSettings.saturation;
+
   useEffect(() => {
     const canvas = ref.current;
     const parent = canvas.parentElement;
@@ -102,7 +151,9 @@ export default function DarkVeil({
       uniforms: {
         uTime: { value: 0 },
         uResolution: { value: new Vec2() },
-        uHueShift: { value: hueShift },
+        uHueShift: { value: currentHueShift },
+        uBrightness: { value: currentBrightness },
+        uSaturation: { value: currentSaturation },
         uNoise: { value: noiseIntensity },
         uScan: { value: scanlineIntensity },
         uScanFreq: { value: scanlineFrequency },
@@ -128,7 +179,9 @@ export default function DarkVeil({
     const loop = () => {
       program.uniforms.uTime.value =
         ((performance.now() - start) / 1000) * speed;
-      program.uniforms.uHueShift.value = hueShift;
+      program.uniforms.uHueShift.value = currentHueShift;
+      program.uniforms.uBrightness.value = currentBrightness;
+      program.uniforms.uSaturation.value = currentSaturation;
       program.uniforms.uNoise.value = noiseIntensity;
       program.uniforms.uScan.value = scanlineIntensity;
       program.uniforms.uScanFreq.value = scanlineFrequency;
@@ -144,14 +197,18 @@ export default function DarkVeil({
       window.removeEventListener("resize", resize);
     };
   }, [
-    hueShift,
+    currentHueShift,
+    currentBrightness,
+    currentSaturation,
     noiseIntensity,
     scanlineIntensity,
     speed,
     scanlineFrequency,
     warpAmount,
     resolutionScale,
+    theme, // Add theme to dependencies so it updates when theme changes
   ]);
+
   return (
     <canvas
       ref={ref}

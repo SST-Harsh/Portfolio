@@ -4,49 +4,49 @@ import About from '../Components/About';
 import Contact from '../Components/Contact';
 import Projects from '../Components/Projects';
 import DarkVeil from '../Utils/DarkVeil';
-import {useRef} from "react"
-export default function MainPage() {
-   const contactRef=  useRef(null)
-    const scrollToConnect = () => {
-            contactRef.current?.scrollIntoView({behavior:'smooth'})
-        
-    };
-  return (
-    <div className='relative w-full min-h-screen text-white'>
-      {/* <SplashCursor/> */}
-      {/* DarkVeil as background for entire page */}
-      <div className='fixed inset-0 z-0'>
-        <DarkVeil />
-      </div> 
+import { useRef } from "react";
+import { useTheme } from '../Context/ThemeProvider';
+import Footer from '../Components/Footer';
 
-      <header className='sticky top-0 left-0 right-0 md:mt-20 z-50 '>
+export default function MainPage() {
+  const contactRef = useRef(null);
+  const { theme } = useTheme();
+
+  const scrollToConnect = () => {
+    contactRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className={`relative w-full h-screen`}>
+      {/* Automatic theme-adjusted background */}
+     <DarkVeil />
+
+      {/* Sticky Navbar */}
+      <header className='  fixed top-0 right-0 left-0 md:mt-20 z-50'>
         <Navbar />
       </header>
 
-      {/* Main content with proper spacing */}
-      <main className='relative z-10 '>
-        <section id="home" className=''>
-          <Hero 
-          scrollToConnect={scrollToConnect}
-          />
+      {/* Main Sections */}
+      <main className='relative z-10'>
+        <section id="home">
+          <Hero scrollToConnect={scrollToConnect} />
         </section>
 
-        <section id="about" className=''>
+        <section id="about">
           <About />
         </section>
 
-        <section id="projects" className=''>
+        <section id="projects">
           <Projects />
         </section>
 
-        <section id="contact" className=''>
-        <Contact   ref={contactRef}  />
-
+        <section id="contact">
+          <Contact ref={contactRef} />
         </section>
       </main>
-       <footer className='relative z-10 py-6 bg-gray-600 text-center text-gray-100 text-sm'>
-        <p>© {new Date().getFullYear()} Harsh Pal Singh. All rights reserved.</p>
-      </footer>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
