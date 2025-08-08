@@ -11,7 +11,7 @@ const Navbar = forwardRef(({ scrollToConnect }, ref) => {
   const { availableTheme, theme, switchTheme } = useTheme();
   const navigate = useNavigate();
 
-  // THEME-BASED STYLES
+ 
   const themeStyles = {
     dark: {
       navBg: "bg-gray-900/50",
@@ -133,7 +133,13 @@ const Navbar = forwardRef(({ scrollToConnect }, ref) => {
                 ))}
               </ul>
             </div>
-          </li>         
+          </li>
+
+          <li>
+            <Link to="/canva">
+              <button>Canva</button>
+            </Link>
+          </li>
         </ul>
 
         {/* Mobile Menu Button */}

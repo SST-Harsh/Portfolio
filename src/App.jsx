@@ -3,6 +3,7 @@ import Register from './Components/Register';
 import MainPage from './Pages/MainPage'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthProvider from './Context/AuthProvider'
+import Canva from './Pages/Canva';
 function App() {
   return (
     <AuthProvider>
@@ -11,6 +12,7 @@ function App() {
           <Route path='/' element={<MainPage />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/register' element={<Register />}></Route>
+          <Route path='/canva' element={<Canva />}></Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

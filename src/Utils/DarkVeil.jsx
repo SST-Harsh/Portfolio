@@ -90,7 +90,7 @@ export default function DarkVeil({
   scanlineFrequency = 0,
   warpAmount = 0,
   resolutionScale = 1,
-  customHueShift = null, // Optional override for manual hue control
+  customHueShift = null, 
   customBrightness = null,
   customSaturation = null,
 }) {
@@ -101,13 +101,13 @@ export default function DarkVeil({
   const themeSettings = {
     light: {
       hue: 0,
-      brightness: 3.5,    // Much brighter for off-white appearance
-      saturation: 0.1     // Very low saturation for neutral colors
+      brightness: 3.5,    
+      saturation: 0.1    
     },
     dark: {
       hue: 20,
-      brightness: 1.8,    // Dimmer for dark theme
-      saturation: 0.6     // Moderate saturation
+      brightness: 1.8,    
+      saturation: 0.6     
     },
     purple: {
       hue: 340,
@@ -128,7 +128,7 @@ export default function DarkVeil({
 
   const currentSettings = themeSettings[theme] || themeSettings.default;
   
-  // Use custom overrides if provided
+  
   const currentHueShift = customHueShift !== null ? customHueShift : currentSettings.hue;
   const currentBrightness = customBrightness !== null ? customBrightness : currentSettings.brightness;
   const currentSaturation = customSaturation !== null ? customSaturation : currentSettings.saturation;
@@ -206,7 +206,7 @@ export default function DarkVeil({
     scanlineFrequency,
     warpAmount,
     resolutionScale,
-    theme, // Add theme to dependencies so it updates when theme changes
+    theme, 
   ]);
 
   return (

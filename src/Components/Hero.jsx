@@ -65,7 +65,7 @@ const Hero = forwardRef(({ scrollToConnect }, ref) => {
     <section
       id="home"
       ref={ref}
-      className={`w-full min-h-[90vh] flex items-center justify-center relative overflow-hidden transition-colors duration-300`}
+      className={`w-full h-screen flex items-center justify-center relative overflow-hidden transition-colors duration-300`}
     >
       {/* Content */}
       <div className="max-w-4xl mx-auto px-6 relative z-10">
